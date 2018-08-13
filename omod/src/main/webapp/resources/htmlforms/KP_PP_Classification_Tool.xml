@@ -240,7 +240,7 @@
                         </td>
                         <td>
                             <p>
-                                <obs id="inmate" conceptId="165130" answerConceptId="162277" answerLabel=" In mate" class="horizontal-layout-options"/><br/>
+                                <obs id="inmate" conceptId="c" answerConceptId="162277" answerLabel=" In mate" class="horizontal-layout-options"/><br/>
                                 <obs id="refugee" conceptId="165130" answerConceptId="165127" answerLabel="Refugee Camps" class="horizontal-layout-options"/>
                                 <obs id="remand" conceptId="165130" answerConceptId="165128" answerLabel="Remand homes" class="horizontal-layout-options" />
                                 <obs id="rehabilitation" conceptId="165130" answerConceptId="165129" answerLabel="Rehabilitation centers" class="horizontal-layout-options" />
