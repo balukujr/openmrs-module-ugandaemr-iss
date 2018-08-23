@@ -43,11 +43,46 @@
         form .lablex {
         width: 93%;
         }
-        
+
 
     </style>
+    <script type="text/javascript">
+        if(jQuery){
+          jQuery(document).ready(function(){
+             if ( jq.browser.msie ) {
+                jq(":checkbox").click(function(){
+                jq(this).change();
+                });
+             }
 
+             jq(".enableDisable").each(function(){
+                var group = jq(this);
+                function disableFn(){
+                   group.children("#disabled").fadeTo(250,0.33);
+                   group.children("#disabled").find(":checkbox").attr("checked",false); //uncheck
+                   group.children("#disabled").find("input[type$='text']").val("");
+                   group.children("#disabled").find("input").attr("disabled",true);  //disable
+                }
+                function enableFn(){
+                  group.children("#disabled").fadeTo(250,1);
+                  group.children("#disabled").find("input").attr("disabled",false);
+                }
+                if (jq(this).children("#trigger").find(":checkbox:first").attr("checked") != "checked") {
+                disableFn();
+                }
+             jq(this).children("#trigger").find(":checkbox:first").change(function(){
+             var checked = jq(this).attr("checked");
+                if(checked == "checked"){
+                    enableFn();
+                }else{
+                    disableFn();
+                }
+             });
+             });
 
+        });
+        }
+    </script>
 
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
@@ -94,21 +129,19 @@
                         <td>
 
                             <p>
+                                <span class="enableDisable">
                                 <obs id="male" conceptId="165124" answerConceptId="90165" answerLabel="Male" style="checkbox" class="vertical-layout-options"/><br/><br/>
                                 <obs id="female" conceptId="165124" answerConceptId="90164" answerLabel="Female" style="checkbox" class="vertical-layout-options"/><br/><br/>
-                                <obs id="other" conceptId="165124" answerConceptId="5622" answerLabel="Other" style="checkbox"
+                                <obs id="trigger" conceptId="165124" answerConceptId="5622" answerLabel="Other" style="checkbox"
                                      class="horizontal-layout-options">
 
-                                    <controls>
-                                        <when value="5622" thenDisplay="#othergender" />
-                                    </controls>
                                 </obs>
-                                <span id="othergender">
-                                    <obs conceptId="163174" labelText="Specify:" />
+                                <span id="disabled">
+                                    <obs conceptId="165135" labelText="Specify:" />
                                 </span>
 
                                 <obs id="refused_to_answer" conceptId="165124" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="vertical-layout-options"/>
-
+                                </span>
                             </p>
                         </td>
                     </tr>
@@ -140,23 +173,20 @@
 
                         </td>
                         <td>
-                                <obs id="migrant_wrker" conceptId="1542" answerConceptId="165126" answerLabel="Moves from place to place to do seasonal work" style="checkbox" class="horizontal-layout-options"/><br/> <br/>
-                                <obs id="fisherman" conceptId="1542" answerConceptId="159674" answerLabel="Works among fishing communities" style="checkbox" class="horizontal-layout-options"/><br/><br/>
-                                <obs id="truck_driver" conceptId="1542" answerConceptId="159466" answerLabel=" Earns a living as a long distance truck driver" style="checkbox" class="horizontal-layout-options" /><br/><br/>
-                                <obs id="uniformed_officers" conceptId="1542" answerConceptId="165125" answerLabel="Uniformed Officers" style="checkbox" class="horizontal-layout-options"/><br/><br/>
-                                <obs id="not_applicable" conceptId="1542" answerConceptId="1175" answerLabel="Not applicable" style="checkbox" class="horizontal-layout-options" /><br/><br/>
-                            <obs id="otherocc"  conceptId="1542" answerConceptId="5622"
-                                     answerLabel="Other" >
-                                <controls>
-                                    <when value="5622" thenDisplay="#otheroccupation" />
-                                </controls>
-                            </obs>
-                            <span id="otheroccupation">
-                                <obs conceptId="163174" labelText="Specify:" />
+                            <span  class="enableDisable">
+                            <obs id="migrant_wrker" conceptId="1542" answerConceptId="165126" answerLabel="Moves from place to place to do seasonal work" style="checkbox" class="horizontal-layout-options"/><br/> <br/>
+                            <obs id="fisherman" conceptId="1542" answerConceptId="159674" answerLabel="Works among fishing communities" style="checkbox" class="horizontal-layout-options"/><br/><br/>
+                            <obs id="truck_driver" conceptId="1542" answerConceptId="159466" answerLabel=" Earns a living as a long distance truck driver" style="checkbox" class="horizontal-layout-options" /><br/><br/>
+                            <obs id="uniformed_officers" conceptId="1542" answerConceptId="165125" answerLabel="Uniformed Officers" style="checkbox" class="horizontal-layout-options"/><br/><br/>
+                            <obs id="not_applicable" conceptId="1542" answerConceptId="1175" answerLabel="Not applicable" style="checkbox" class="horizontal-layout-options" /><br/><br/>
+                                <obs id="trigger"  conceptId="1542" answerConceptId="5622"
+                                 answerLabel="Other" />
+                            <span id="disabled">
+                                <obs conceptId="165136" labelText="Specify:" />
                             </span>
 
                             <obs id="refused_to_answer" conceptId="1542" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="horizontal-layout-options" /><br/>
-
+                            </span>
                         </td>
                     </tr>
 
