@@ -181,6 +181,14 @@
                      jq("#closed_setting").find(":checkbox").attr("checked",false);
                }
 
+               var patientAge = <lookup expression="patient.age" />;
+                if(sexAtBirth === "90164" &amp;&amp; patientAge &lt; 25 &amp;&amp; patientAge &gt;=15 ){
+                 jq("#agyw").find(":checkbox").attr("checked",true);
+                } else{
+                 jq("#agyw").find(":checkbox").attr("checked",false);
+                }
+
+
                function checkOtherItem(trigger_field , field_to_check){
                if(trigger_field == true){
                 jq("#"+ field_to_check).find(":checkbox").attr("checked",true);
