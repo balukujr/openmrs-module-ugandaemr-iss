@@ -219,7 +219,6 @@
             <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117"
                                order="629d78e9-93e5-43b0-ad8a-48313fd99117"/>
         </span>
-
         <section>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead>
@@ -522,7 +521,6 @@
                     <th>Final Classification: (Tick dominant category)</th>
 
                 </thead>
-
                 <tbody>
                 <tr>
                     <td>
@@ -556,8 +554,8 @@
                             </span>
                         </td>
                     </tr>
-
                 </tbody>
+
             </table>
 
         </section>
