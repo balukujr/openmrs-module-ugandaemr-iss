@@ -26,7 +26,7 @@
         }
 
         table {
-        width: 99%;
+        width: 100;
         display: inline-block;
         }
 
@@ -219,6 +219,7 @@
             <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117"
                                order="629d78e9-93e5-43b0-ad8a-48313fd99117"/>
         </span>
+
         <section>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead>
@@ -228,10 +229,21 @@
                 </thead>
                 <tbody class="triggers">
                     <tr>
+                        <td>
+                            Encounter Date:
+                            <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
+                        </td>
+                        <td>
+                            <label><span class="required">*</span>Assesed by:</label>
+                            <encounterProvider role="Provider" style="autocomplete" required="required"/>
+                        </td>
+                    </tr>
+
+                    <tr>
 
                         <td>
                             <p>
-                                <label>1. What was your sex at birth?</label>
+                                <label><span class="required">*</span>1. What was your sex at birth?</label>
                             </p>
 
                         </td>
@@ -239,7 +251,7 @@
                             <p>
                                 <obs id="sex-at-birth" conceptId="90252"
                                      answerConceptIds="90165,90164,5622,162570"
-                                     answerLabels="Male,Female,Other,Refuse to answer" style="radio" class="vertical-layout-options" />
+                                     answerLabels="Male,Female,Other,Refuse to answer" style="radio" class="vertical-layout-options" required="true"/>
                             </p>
                         </td>
                     </tr>
@@ -255,7 +267,7 @@
                         <td>
                                 <span class="gender">
                                     <obs style="radio" id="your-gender" conceptId="165124" answerConceptIds="90165,90164,162570,5622"
-                                      answerLabels="Male,Female,Refuse to answer,Other" class="vertical-layout-options" ><br/><br/><br/><br/><br/>
+                                      answerLabels="Male,Female,Refuse to answer,Other" class="vertical-layout-options" required="true" ><br/><br/><br/><br/><br/>
                                      <controls>
                                             <when value="5622" thenDisplay="#gender-other"/>
                                         </controls>
@@ -282,7 +294,7 @@
                             <p>
                                 <obs id="sex-partner" conceptId="160109"
                                      answerConceptIds="163290,163291,163275,160573,162570"
-                                     answerLabels="Men only,Women only,Both men and women,Not sexually active,Refuse to answer" style="radio" class="vertical-layout-options" />
+                                     answerLabels="Men only,Women only,Both men and women,Not sexually active,Refuse to answer" style="radio" class="vertical-layout-options" required="true"/>
                              </p>
                         </td>
                     </tr>
@@ -326,7 +338,7 @@
                             <p>
                                 <obs id="160579" conceptId="160579" style="radio"
                                      answerConceptIds="1065,1066,162570"
-                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options"/>
+                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options" required="true"/>
                             </p>
                         </td>
                     </tr>
@@ -345,7 +357,7 @@
                             <p>
                                 <obs id="160666" conceptId="160666" style="radio"
                                      answerConceptIds="1065,1066,162570"
-                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options"/>
+                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options" required="true"/>
                             </p>
                         </td>
                     </tr>
@@ -364,7 +376,7 @@
                             <p>
                                 <obs id="6096" conceptId="6096" style="radio"
                                      answerConceptIds="1065,1066,1067,162570"
-                                     answerLabels="Yes,No,Do not Know,Refuse to answer" class="vertical-layout-options"/>
+                                     answerLabels="Yes,No,Do not Know,Refuse to answer" class="vertical-layout-options" required="true"/>
                             </p>
                         </td>
                     </tr>
@@ -381,7 +393,7 @@
                             <p>
                                 <obs id="165130" conceptId="165130" style="radio"
                                      answerConceptIds="162277,165127,165128,165129,1175,162570"
-                                      class="vertical-layout-options"/>
+                                      class="vertical-layout-options" required="true"/>
 
                             </p>
                         </td>
@@ -557,7 +569,6 @@
                 </tbody>
 
             </table>
-
         </section>
     </div>
     <section>
