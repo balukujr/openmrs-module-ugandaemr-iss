@@ -49,6 +49,10 @@
     <script type="text/javascript">
         if(jQuery){
           jQuery(document).ready(function(){
+                <ifMode mode="ENTER">
+                    disableContainer('#key-classification');
+
+                </ifMode>
 
                  jq("#msm_final").find(":checkbox").attr("disabled","disabled");
                  jq("#tg_final").find(":checkbox").attr("disabled","disabled");
@@ -518,7 +522,7 @@
                     </th>
                     <th> Classify</th>
                 </thead>
-                <tbody class="key_pop">
+                <tbody class="key_pop" id="key-classification">
                     <tr>
                         <td>
                             If client answers Male to Q1, Men Only or Men and Women to Q3, then classify as Man who has
