@@ -49,10 +49,7 @@
     <script type="text/javascript">
         if(jQuery){
           jQuery(document).ready(function(){
-                <ifMode mode="ENTER">
-                    disableContainer('#key-classification');
 
-                </ifMode>
 
                  jq("#msm_final").find(":checkbox").attr("disabled","disabled");
                  jq("#tg_final").find(":checkbox").attr("disabled","disabled");
@@ -64,6 +61,47 @@
                  jq("#tkr_final").find(":checkbox").attr("disabled","disabled");
                  jq("#ff_final").find(":checkbox").attr("disabled","disabled");
                  jq("#pip_final").find(":checkbox").attr("disabled","disabled");
+
+                 jq("#msm").find(":checkbox").attr("disabled","disabled");
+                 jq("#tg").find(":checkbox").attr("disabled","disabled");
+                 jq("#mw").find(":checkbox").attr("disabled","disabled");
+                 jq("#ff").find(":checkbox").attr("disabled","disabled");
+                 jq("#tkr").find(":checkbox").attr("disabled","disabled");
+                 jq("#uniformed_officers").find(":checkbox").attr("disabled","disabled");
+                 jq("#sw").find(":checkbox").attr("disabled","disabled");
+                 jq("#pwid").find(":checkbox").attr("disabled","disabled");
+                 jq("#dc").find(":checkbox").attr("disabled","disabled");
+                 jq("#agyw").find(":checkbox").attr("disabled","disabled");
+                 jq("#pip").find(":checkbox").attr("disabled","disabled");
+                 jq("#closed_setting").find(":checkbox").attr("disabled","disabled");
+
+               <ifMode mode="EDIT">
+                    <!--disableContainer('#key-classification');-->
+                     enableCheckedBox("msm");
+                     enableCheckedBox("tg");
+                     enableCheckedBox("mw");
+                     enableCheckedBox("ff");
+                     enableCheckedBox("tkr");
+                     enableCheckedBox("uniformed_officers");
+                     enableCheckedBox("sw");
+                     enableCheckedBox("pwid");
+                     enableCheckedBox("dc");
+                     enableCheckedBox("agyw");
+                     enableCheckedBox("pip");
+                     enableCheckedBox("closed_setting");
+
+                    enableCheckedBox("msm_final");
+                    enableCheckedBox("tg_final");
+                    enableCheckedBox("sw_final");
+                     enableCheckedBox("pwid_final");
+                     enableCheckedBox("mw_final");
+                     enableCheckedBox("agyw_final");
+                     enableCheckedBox("dc_final");
+                     enableCheckedBox("tkr_final");
+                     enableCheckedBox("ff_final");
+                     enableCheckedBox("pip_final");
+
+                </ifMode>
 
              if ( jq.browser.msie ) {
                 jq(":checkbox").click(function(){
@@ -91,7 +129,7 @@
                              <!-- if the other is checked and no specification made -->
                         if (getValue('your-gender.value')==="5622") {
                             if (getValue('other-specify.value') === '') {
-                                getField('other-specify.error').html('This field is required ').show();
+                                getField('other-specify.error').html(' Please specify the other gender you consider yourself').show();
                                 return false;
                             }
                             else{
@@ -102,7 +140,7 @@
 
                          if (getValue('trigger.value')==="5622") {
                             if (getValue('other-occ.value') === '') {
-                                getField('other-occ.error').html('This field is required ').show();
+                                getField('other-occ.error').html('Please specify the other occupation ').show();
                                 return false;
                             }
                             else{
@@ -186,24 +224,30 @@
                var setting = jq("#165130").find(":radio:checked").val();
 
                if(sexAtBirth === "90165" &amp;&amp;  (sexPartner === "163290" || sexPartner === "163275")){
+                    jq("#msm").find(":checkbox").removeAttr("disabled");
                     jq("#msm").find(":checkbox").attr("checked",true);
+
                }
                else{
                      jq("#msm").find(":checkbox").attr("checked",false);
+                      jq("#msm").find(":checkbox").attr("disabled",true);
                }
 
                 <!--transgender checking-->
                var gender = jq("#your-gender").find(":radio:checked").val();
                 if(((gender === "90165"  || gender ==="5622" ) &amp;&amp; (sexAtBirth ==="90164" || sexAtBirth ==="5622")) || (gender ==="90164" &amp;&amp; sexAtBirth=== "90165" || gender ==="90165" &amp;&amp; sexAtBirth=== "90164")){
                      jq("#tg").find(":checkbox").attr("checked",true);
+                      jq("#tg").find(":checkbox").removeAttr("disabled");
                 }
                 else{
                      jq("#tg").find(":checkbox").attr("checked",false);
+                      jq("#tg").find(":checkbox").attr("disabled",true);
                 }
 
                 var occupation = jq("#occupation").find(":checkbox:checked").val();
 
 
+                <!--checking key population section-->
                var migrant_wrker= jq("#migrant-wrker").find(":checkbox").prop('checked');
                var fisherman = jq("#fisherman").find(":checkbox").prop('checked');
                var truck_driver= jq("#truck-driver").find(":checkbox").prop('checked');
@@ -220,22 +264,34 @@
 
                <!--closed setting or inmate-->
                 if(setting === "162277" ){
+                jq("#pip").find(":checkbox").removeAttr('disabled');
                    jq("#pip").find(":checkbox").attr("checked",true);
+
+                    jq("#closed_setting").find(":checkbox").attr("checked",false);
+                     jq("#closed_setting").find(":checkbox").attr("disabled","disabled");
                }
                else if (setting === "165127" || setting === "165128" || setting === "165129") {
                     jq("#closed_setting").find(":checkbox").attr("checked",true);
                      jq("#pip").find(":checkbox").attr("checked",false);
+                     jq("#closed_setting").find(":checkbox").removeAttr('disabled');
+                     jq("#pip").find(":checkbox").attr("disabled","disabled");
                }
                else{
                     jq("#pip").find(":checkbox").attr("checked",false);
                      jq("#closed_setting").find(":checkbox").attr("checked",false);
+                     jq("#closed_setting").find(":checkbox").attr("disabled","disabled");
+                     jq("#pip").find(":checkbox").attr("disabled",true);
+
                }
 
                var patientAge = <lookup expression="patient.age" />;
                 if(sexAtBirth === "90164" &amp;&amp; patientAge &lt; 25 &amp;&amp; patientAge &gt;=15 ){
+                jq("#agyw").find(":checkbox").removeAttr("disabled");
                  jq("#agyw").find(":checkbox").attr("checked",true);
+
                 } else{
                  jq("#agyw").find(":checkbox").attr("checked",false);
+                 jq("#agyw").find(":checkbox").attr("disabled","disabled");
                 }
 
                  <!--jq("#msm_final").find(":checkbox").attr("disabled","disabled");-->
@@ -271,18 +327,23 @@
 
                function checkOtherItem(trigger_field , field_to_check){
                if(trigger_field == true){
+               jq("#"+ field_to_check).find(":checkbox").removeAttr("disabled");
                 jq("#"+ field_to_check).find(":checkbox").attr("checked",true);
                }else{
+                jq("#"+ field_to_check).find(":checkbox").attr("disabled",true);
                  jq("#"+ field_to_check).find(":checkbox").attr("checked",false);
                }
                }
 
                function checkOtherItemIfYes(trigger_field, field_to_check){
                 if(trigger_field === "1065"){
-               jq("#"+ field_to_check).find(":checkbox").attr("checked",true);
+                 jq("#"+ field_to_check).find(":checkbox").removeAttr("disabled");
+                jq("#"+ field_to_check).find(":checkbox").attr("checked",true);
+
                }
                else{
                  jq("#"+ field_to_check).find(":checkbox").attr("checked",false);
+                 jq("#"+ field_to_check).find(":checkbox").attr("disabled",true);
                }
                }
 
@@ -303,9 +364,6 @@
                }
 
                }
-
-
-
                function disableFn(group){
                 group.children("#disabled").find("input").attr("required","false");
                    group.children("#disabled").fadeTo(250,0.33);
@@ -320,6 +378,14 @@
                   group.children("#disabled").find("input").attr("disabled",false);
 
                 }
+
+                function enableCheckedBox(checkboxId){
+                     if(jq("#" + checkboxId ).find(":checkbox").prop('checked')){
+                        jq("#" + checkboxId).find(":checkbox").attr("disabled",false);
+                    }
+                }
+
+
     </script>
 
     <div class="ai-page-frame">
@@ -345,7 +411,7 @@
                             <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
                         </td>
                         <td>
-                            <label><span class="required">*</span>Assesed by:</label>
+                            <label><span class="required">*</span>Assessed by:</label>
                             <encounterProvider role="Provider" style="autocomplete" required="true"/>
                         </td>
                     </tr>
