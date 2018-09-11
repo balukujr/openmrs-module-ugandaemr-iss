@@ -90,18 +90,67 @@
                      enableCheckedBox("pip");
                      enableCheckedBox("closed_setting");
 
-                    enableCheckedBox("msm_final");
-                    enableCheckedBox("tg_final");
-                    enableCheckedBox("sw_final");
-                     enableCheckedBox("pwid_final");
-                     enableCheckedBox("mw_final");
-                     enableCheckedBox("agyw_final");
-                     enableCheckedBox("dc_final");
-                     enableCheckedBox("tkr_final");
-                     enableCheckedBox("ff_final");
-                     enableCheckedBox("pip_final");
+
+                        disableEnableCheckBox("msm", "msm_final");
+                        disableEnableCheckBox("tg", "tg_final");
+                        disableEnableCheckBox("sw", "sw_final");
+                        disableEnableCheckBox("pwid", "pwid_final");
+                        disableEnableCheckBox("mw", "mw_final");
+                        disableEnableCheckBox("agyw", "agyw_final");
+                        disableEnableCheckBox("dc", "dc_final");
+                        disableEnableCheckBox("tkr", "tkr_final");
+                        disableEnableCheckBox("ff", "ff_final");
+                        disableEnableCheckBox("pip", "pip_final");
 
                 </ifMode>
+
+             <!--if none is checked in the dorminant section uncheck all other checkboxes   -->
+                jq('#none').click(function(){
+                if (getValue('none.value')) {
+                      jq("#msm_final").find(":checkbox").attr("checked",false);
+                      jq("#tg_final").find(":checkbox").attr("checked",false);
+                      jq("#sw_final").find(":checkbox").attr("checked",false);
+                      jq("#pwid_final").find(":checkbox").attr("checked",false);
+                      jq("#mw_final").find(":checkbox").attr("checked",false);
+                      jq("#agyw_final").find(":checkbox").attr("checked",false);
+                       jq("#dc_final").find(":checkbox").attr("checked",false);
+                       jq("#tkr_final").find(":checkbox").attr("checked",false);
+                       jq("#ff_final").find(":checkbox").attr("checked",false);
+                       jq("#pip_final").find(":checkbox").attr("checked",false);
+
+                }
+                });
+
+                jq('#refused_to_answer').change(function(){
+                    if(jq("#refused_to_answer").find(":checkbox").prop('checked')){
+                          jq("#occupation").each(function(){
+                           var grp = jq("#occupation");
+                            grp.find(":checkbox").attr("checked",false);
+                            grp.find(":checkbox").attr("disabled",true);
+                            grp.find(":input").attr("disabled",true);
+                           });
+                    }else{
+                        jq("#occupation").each(function(){
+                           var grp = jq("#occupation");
+                            grp.find(":checkbox").attr("disabled",false);
+                           });
+                    }
+                });
+
+                jq(".final_classification").change(function(){
+                    if(jq("#msm_final").find(":checkbox").prop('checked')||
+                 jq("#tg_final").find(":checkbox").prop('checked')||
+                 jq("#sw_final").find(":checkbox").prop('checked')||
+                 jq("#pwid_final").find(":checkbox").prop('checked')||
+                 jq("#mw_final").find(":checkbox").prop('checked')||
+                 jq("#agyw_final").find(":checkbox").prop('checked')||
+                 jq("#dc_final").find(":checkbox").prop('checked')||
+                 jq("#tkr_final").find(":checkbox").prop('checked')||
+                 jq("#ff_final").find(":checkbox").prop('checked')||
+                 jq("#pip_final").find(":checkbox").prop('checked'))
+                 {  jq("#none").find(":checkbox").attr("checked",false);}
+                });
+
 
              if ( jq.browser.msie ) {
                 jq(":checkbox").click(function(){
@@ -148,6 +197,24 @@
                              return jq("#htmlform").valid();
                             }
                         }
+                            <!--validating to ensure that one dominant grp is selected-->
+                         if(jq("#msm_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#tg_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#sw_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#pwid_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#mw_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#agyw_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#dc_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#tkr_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#ff_final").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#none").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#pip_final").find(":checkbox").prop('checked') !== true ){
+
+                                getField('none.error').html('Please provide atleast one classification').show();
+                                return false;
+                            }else{
+                            setValue('none.error', '');
+                            }
 
 
 
@@ -353,6 +420,8 @@
         });
         }
 
+
+
          function disableEnableCheckBoxes(checkedValue, field_to_enable_disable){
                 if(checkedValue === true){
                 jq("#"+ field_to_enable_disable).find(":checkbox").removeAttr("disabled");
@@ -363,7 +432,21 @@
                   jq("#"+ field_to_enable_disable).find(":checkbox").attr("disabled","disabled");
                }
 
+         }
+
+         function disableEnableCheckBox(checkedValue, field_to_enable_disable){
+                if(jq("#"+ checkedValue).find(":checkbox").prop('checked')){
+                jq("#"+ field_to_enable_disable).find(":checkbox").removeAttr("disabled");
+
                }
+               else{
+                  jq("#"+ field_to_enable_disable).find(":checkbox").attr("checked",false);
+                  jq("#"+ field_to_enable_disable).find(":checkbox").attr("disabled","disabled");
+               }
+
+         }
+
+
                function disableFn(group){
                 group.children("#disabled").find("input").attr("required","false");
                    group.children("#disabled").fadeTo(250,0.33);
@@ -496,9 +579,9 @@
                             <span id="disabled">
                                 <obs id="other-occ" conceptId="165136" labelText="Specify:" />
                             </span>
-
-                            <obs id="refused_to_answer" conceptId="1542" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="horizontal-layout-options" /><br/>
                             </span>
+                            <obs id="refused_to_answer" conceptId="1542" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="horizontal-layout-options" /><br/>
+
                         </td>
                     </tr>
 
