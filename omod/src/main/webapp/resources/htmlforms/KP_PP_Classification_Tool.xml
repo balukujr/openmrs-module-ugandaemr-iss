@@ -46,6 +46,9 @@
         
 
     </style>
+    <script type="text/javascript">
+        if(jQuery){
+          jQuery(document).ready(function(){
 
 
                  jq("#msm_final").find(":checkbox").attr("disabled","disabled");
@@ -72,6 +75,46 @@
                  jq("#pip").find(":checkbox").attr("disabled","disabled");
                  jq("#closed_setting").find(":checkbox").attr("disabled","disabled");
 
+
+                    jq("#occupation").change(function(){
+
+                    if(jq("#not_applicable").find(":checkbox").prop('checked')){
+
+                           jq("#migrant-wrker").find(":checkbox").attr("checked",false);
+                           jq("#migrant-wrker").find(":checkbox").attr("disabled",true);
+
+                             jq("#truck-driver").find(":checkbox").attr("checked",false);
+                            jq("#truck-driver").find(":checkbox").attr("disabled",true);
+
+                            jq("#fisherman").find(":checkbox").attr("checked",false);
+                            jq("#fisherman").find(":checkbox").attr("disabled",true);
+
+                             jq("#uniformed-officers").find(":checkbox").attr("checked",false);
+                            jq("#uniformed-officers").find(":checkbox").attr("disabled",true);
+
+                            jq("#refused_to_answer").find(":checkbox").attr("checked",false);
+                            jq("#refused_to_answer").find(":checkbox").attr("disabled",true);
+
+                             jq("#otherocc").find(":checkbox").attr("checked",false);
+                            jq("#otherocc").find(":checkbox").attr("disabled",true);
+
+                            jq("#occupation").find(":input").attr("disabled",true);
+
+                    }else{
+                       jq("#otherocc").find(":checkbox").attr("disabled",false);
+
+                       jq("#refused_to_answer").find(":checkbox").attr("disabled",false);
+
+                       jq("#uniformed-officers").find(":checkbox").attr("disabled",false);
+
+                       jq("#fisherman").find(":checkbox").attr("disabled",false);
+
+                      jq("#truck-driver").find(":checkbox").attr("disabled",false);
+
+                       jq("#migrant-wrker").find(":checkbox").attr("disabled",false);
+
+                    }
+                  });
                <ifMode mode="EDIT">
                     <!--disableContainer('#key-classification');-->
                      enableCheckedBox("msm");
@@ -134,6 +177,7 @@
                     }
                 });
 
+
                 jq(".final_classification").change(function(){
                     if(jq("#msm_final").find(":checkbox").prop('checked')||
                  jq("#tg_final").find(":checkbox").prop('checked')||
@@ -159,7 +203,7 @@
                        jq("#htmlform").validate();
 
                              if(jq("#migrant-wrker").find(":checkbox").prop('checked') !== true &amp;&amp;
-                              jq("#trigger").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#otherocc").find(":checkbox").prop('checked') !== true &amp;&amp;
                               jq("#not-applicable").find(":checkbox").prop('checked') !== true &amp;&amp;
                               jq("#uniformed-officers").find(":checkbox").prop('checked') !== true &amp;&amp;
                               jq("#truck-driver").find(":checkbox").prop('checked') !== true &amp;&amp;
@@ -184,7 +228,7 @@
                             }
                         }
 
-                         if (getValue('trigger.value')==="5622") {
+                         if (getValue('otherocc.value')==="5622") {
                             if (getValue('other-occ.value') === '') {
                                 getField('other-occ.error').html('Please specify the other occupation ').show();
                                 return false;
@@ -220,10 +264,10 @@
 
                 jq(".enableDisable").each(function(){
                 var group = jq(this);
-                if (jq(this).children("#trigger").find(":checkbox:first").attr("checked") != "checked") {
+                if (jq(this).children("#otherocc").find(":checkbox:first").attr("checked") != "checked") {
                 disableFn(group);
                 }
-             jq("#trigger").find(":checkbox:first").change(function(){
+             jq("#otherocc").find(":checkbox:first").change(function(){
              var checked = jq(this).attr("checked");
                 if(checked == "checked"){
                     enableFn(group);
@@ -559,6 +603,7 @@
 
                         </td>
                         <td>
+                             <span  class="enableDisable" id="occupation">
                                 <obs id="migrant_wrker" conceptId="1542" answerConceptId="165126" answerLabel="Moves from place to place to do seasonal work" style="checkbox" class="horizontal-layout-options"/><br/> <br/>
                                 <obs id="fisherman" conceptId="1542" answerConceptId="159674" answerLabel="Works among fishing communities" style="checkbox" class="horizontal-layout-options"/><br/><br/>
                                 <obs id="truck_driver" conceptId="1542" answerConceptId="159466" answerLabel=" Earns a living as a long distance truck driver" style="checkbox" class="horizontal-layout-options" /><br/><br/>
@@ -573,7 +618,7 @@
                             <span id="otheroccupation">
                                 <obs conceptId="163174" labelText="Specify:" />
                             </span>
-
+                            </span>
                             <obs id="refused_to_answer" conceptId="1542" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="horizontal-layout-options" /><br/>
 
                         </td>
@@ -667,7 +712,7 @@
                     </th>
                     <th> Classify</th>
                 </thead>
-                <tbody>
+                <tbody class="key_pop" id="key-classification">
                     <tr>
                         <td>
                             If client answers Male to Q1, Men Only or Men and Women to Q3, then classify as Man who has
@@ -793,6 +838,7 @@
                 <tbody>
                 <tr>
                     <td>
+                         <span class="final_classification">
                         <obs  conceptId="165134" answerConceptId="160578" answerLabel="MSM" />
 
                         <obs  conceptId="165134" answerConceptId="165131" answerLabel="TG" />
@@ -814,6 +860,7 @@
                         <obs  conceptId="165134" answerConceptId="160578" answerLabel="Person in Prison" />
 
                         <obs  conceptId="165134" answerConceptId="1107" answerLabel="None"  />
+                        </span>
                     </td>
                 </tr>
                     <tr>
